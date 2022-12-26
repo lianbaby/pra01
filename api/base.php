@@ -70,31 +70,23 @@ class DB{
     }
     
     public function count(...$arg){
-        $sql="select count(*) from $this->table ";
-        if(isset($arg[0])){
-            if(is_array($arg[0])){
-                $tmp=$this->arrayToSqlArray($arg[0]);
-                $sql=$sql . " where " . join(" && ",$tmp);
-            }else{
-                $sql=$sql .$arg[0];
-            }
-        }
-        return $this->pdo->query($sql)->fetchColumn();
+        return $this->math('count',...$arg);
     }
     
-    public function sum($col,...$arg){
-        $sql="select sum($col) from $this->table ";
-        return $this->pdo->query($sql)->fetchColumn();
+    public function sum($col,...$arg){ //...arg不定參數
+        return $this->math('sum',$col,...$arg); //...arg為解構賦值
     }
 
     public function max($col,...$arg){
-
+        return $this->math('max',$col,...$arg);
     }
     
-    public function min($col){
+    public function min($col,...$arg){
+        return $this->math('min',$col,...$arg);
 
     }
-    public function avg($col){
+    public function avg($col,...$arg){
+        return $this->math('avg',$col,...$arg);
 
     }
 
@@ -104,8 +96,31 @@ class DB{
         }
         return $tmp;
     }
-}
 
+    private function math($math,...$arg){
+        switch($math){
+            case 'count':
+                $sql="select count(*) from $this->table ";
+                if(isset($arg[0])) $con=$arg[0];
+            break;
+            default:
+                $col=$arg[0];
+                if(isset($arg[1])){
+                    $con=$arg[1];
+                }
+                    $sql="select $math($col) from $this->table ";
+        }
+        if(isset($con)){
+            if(is_array($con)){
+                $tmp=$this->arrayToSqlArray($con);
+                $sql=$sql . " where " .  join(" && ",$tmp);
+            }else{
+                $sql=$sql . $con;
+            }
+        } 
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+}
 
 //全域變數萬用function ，dd用來測試
 function dd($array){
@@ -125,7 +140,7 @@ function q($sql){
 }
 
 //測試功能是否正常
-$db=new DB('bottom');
+// $db=new DB('bottom');
 //$bot=$db->del(3); //測試del功能
 //$bot=$db->all();
 //print_r($bot);
@@ -133,9 +148,14 @@ $db=new DB('bottom');
 ////$bot=$db->all(); //印出所有陣列
 //print_r($bot);
 
-$row=$db->find(1);//先找到id "1"
-$row['bottom']="2023版權所有";//改寫資料
-$db->save($row);//進行save功能，因帶有id資料，所以判斷為更新
+// $row=$db->find(1);//先找到id "1"
+// $row['bottom']="2023版權所有";//改寫資料
+// $db->save($row);//進行save功能，因帶有id資料，所以判斷為更新
+
+//解構
+//$array=['a'=>'b','c'=>'d'];
+//extract($array);
+//echo $a //會輸出b
 
 
 //php結尾，如果確定該檔案不顯示在html裡，不一定需要有
