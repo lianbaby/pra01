@@ -19,13 +19,13 @@ function lo(x)
 }
 function op(x,y,url)
 {
-	$(x).fadeIn()
-	if(y)
+	$(x).fadeIn()  //淡入
+	if(y)		//如果有y，淡入
 	$(y).fadeIn()
-	if(y&&url)
+	if(y&&url)  //如果有y和url，載入url
 	$(y).load(url)
 }
 function cl(x)
 {
-	$(x).fadeOut();
+	$(x).fadeOut(); //淡出
 }

@@ -130,7 +130,7 @@ echo "</pre>";
 }
 
 function to($url){
-    header("location".$url);
+    header("location:".$url);
 }
 
 function q($sql){
@@ -138,6 +138,9 @@ function q($sql){
     $pdo=new PDO($dsn,'root','');
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
+
+$Bottom=new DB('bottom'); //方便各個頁面引用
+$Title=new DB('title');
 
 //測試功能是否正常
 // $db=new DB('bottom');
