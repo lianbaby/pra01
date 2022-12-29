@@ -31,7 +31,8 @@
                         <input type="checkbox" name="del[]" value="<?=$row['id'];?>">
                     </td>
                     <td>
-                        <input type="button" value="更新圖片">
+                        <!-- 更新欄位：要帶一組id給後端，才知道要更新哪組 -->
+                        <input type="button" value="更新圖片" onclick="op('#cover','#cvr','./modal/upload_title.php?id=<?=$row['id'];?>')" >
                         <!-- 自己增加一個隱藏帶id的資料，不然不知道是哪筆 -->
                         <input type="hidden" name="id[]" value="<?=$row['id'];?>"> 
                     </td>

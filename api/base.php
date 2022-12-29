@@ -141,6 +141,7 @@ function q($sql){
 
 $Bottom=new DB('bottom'); //方便各個頁面引用
 $Title=new DB('title');
+$Ad=new DB('ad');
 
 //測試功能是否正常
 // $db=new DB('bottom');
