@@ -1,6 +1,6 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
     <p class="t cent botli">網站標題管理</p>
-    <form method="post" action="?do=tii"> 
+    <form method="post" action="./api/edit_title.php"> 
         <table width="100%">
             <tbody>
                 <tr class="yel">
@@ -27,6 +27,7 @@
                         <input type="radio" name="sh" value="<?=$row['id'];?>" <?=$checked;?>>
                     </td>
                     <td width="7%">
+                        <!-- 刪除 -->
                         <input type="checkbox" name="del[]" value="<?=$row['id'];?>">
                     </td>
                     <td>
