@@ -146,6 +146,19 @@ $Mvim=new DB('mvim');
 $Image=new DB('image');
 $News=new DB('news');
 $Admin=new DB('admin');
+$Menu=new DB('menu');
+$Total=new DB('total');
+
+//第一次visit進站總人數+1
+//換不同瀏覽器，或是整個關掉，重新進去視同new，但瀏覽器沒有全部關掉的情況下，重複進去不會算+1
+//如果session不存在，撈出進站總人數資料，並進行+1
+if(!isset($_SESSION['visit'])){
+    $_SESSION['visit']=1;
+    $total=$Total->find(1);
+    $total['total']++;
+    $Total->save($total);
+}
+
 
 //測試功能是否正常
 // $db=new DB('bottom');

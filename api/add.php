@@ -13,6 +13,11 @@ switch($table){
         $data['pw']=$_POST['pw'];
     break;
     case "Menu":
+        $data['name']=$_POST['name'];
+        $data['href']=$_POST['href'];
+        $data['sh']=1;//預設顯示
+        $data['parent']=0;//0為主選單，帶有id的為次選單
+    break;
     break;
     default:
     if(isset($_POST['text'])){  //判斷是否有text

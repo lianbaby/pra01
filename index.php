@@ -23,8 +23,9 @@ include "./api/base.php";
 	</div>
 	<!-- <iframe style="display:none;" name="back" id="back"></iframe>  index跟back裡這個iframe記得刪掉--> 
 	<div id="main">
-		<a title="" href="./home_files/home.htm">
-			<div class="ti" style="background:url('use/'); background-size:cover;"></div>
+		<!-- 標題顯示 -->
+		<a title="<?=$Title->find(['sh'=>1])['text'];?>" href="index.php"> 
+		<div class="ti" style="background:url('upload/<?=$Title->find(['sh'=>1])['img'];?>'); background-size:cover;"></div>
 			<!--標題-->
 		</a>
 		<div id="ms">
@@ -35,7 +36,7 @@ include "./api/base.php";
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
-						1 </span>
+						<?=$Total->find(1)['total'];?> </span>
 				</div>
 			</div>
 			<?php 
